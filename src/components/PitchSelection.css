@@ -1,32 +1,59 @@
-ul {
+/* New stuff! */
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 4px;
+  text-align: left;
+}
+
+legend {
+  font-size: 0.8rem;
+  /* Was difficult to position the legend, followed this trick: https://stackoverflow.com/questions/5818960/why-wont-my-legend-element-display-inline */
+  float: left;
+}
+
+.radio-buttons-parent {
+  display: grid;
+  /* TODO: should this be for variable number of options? */
+  grid-template-columns: repeat(5, 1fr);
   justify-content: center;
-  align-self: flex-start;
-  border-radius: var(--rounded);
+  align-items: stretch;
   border: var(--border-width) solid var(--color-border-dark);
+  border-radius: var(--rounded);
 }
 
-li:last-child {
-  border: none;
+.radio-buttons-parent:focus-within {
+  outline: 5px auto -webkit-focus-ring-color;
 }
 
-li {
+.radio-button-container {
+  border-radius: 0px;
   border-right: var(--border-width) solid var(--color-border-dark);
+  min-width: 1.8rem;
+  transition: all 0.2s;
+  color: var(--color-border-medium);
 }
 
-.selection-button {
-  width: 100%;
-  border: none;
-  border-radius: 0;
-  transition: all 1s;
-  min-width: 2rem;
+.radio-button-container:last-child {
+  border-right: none;
 }
 
-.selection-button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+.radio-button-container label {
+  cursor: inherit;
+  font-size: 1rem;
 }
 
-.selected {
+.radio-button-container input {
+  appearance: none;
+}
+
+.radio-button-container-selected {
   background-color: var(--color-primary);
   color: var(--color-white);
 }

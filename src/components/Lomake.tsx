@@ -3,38 +3,74 @@ import PersonalInfoCheckbox from './PersonalInfoCheckbox';
 import FormField from './FormField';
 
 import './Lomake.css';
+import SongSelection from './SongSelection';
+import { useState, FormEvent as ReactFormEvent } from 'react';
 
 const PITCH_OPTIONS = ['-2', '-1', '0', '+1', '+2'] as const;
+type Pitch = (typeof PITCH_OPTIONS)[number];
 const DEFAULT_PITCH = '0';
 
+interface FormData {
+  username: string;
+  songId: string | null;
+  pitch: Pitch;
+  allowPersonalInfo: boolean;
+}
+
+export type FormDataKey = keyof FormData;
+
 export default function Lomake() {
+  const [formData, setFormData] = useState<FormData>({
+    username: '',
+    songId: null,
+    pitch: DEFAULT_PITCH,
+    allowPersonalInfo: false,
+  });
+
+  /* TODO: this is NOT as typesafe as you'd expect! Choose to live with it or else do runtime checks? Although I'm pretty sure it could be done at compoile time as well... */
+  function setFormProperty(propertyName: FormDataKey, newValue: FormData[FormDataKey]) {
+    setFormData({ ...formData, [propertyName]: newValue });
+  }
+
+  function handleFormSubmit(e: ReactFormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log(JSON.stringify(formData, null, 2));
+  }
+
   return (
     <>
       <h2>Ilmoittautumislomake</h2>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <FormField>
           <label htmlFor="username" className="required">
             Nimi tai nimimerkki
           </label>
-          <input type="text" name="username" id="username" required />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value={formData.username}
+            onChange={(e) => setFormProperty('username', e.target.value)}
+            required
+          />
         </FormField>
 
-        <FormField>
-          <label htmlFor="song" className="required">
-            Biisi
-          </label>
-          <select name="song" id="song">
-            <option value="" hidden disabled>
-              Valitse biisi
-            </option>
-            <option value="1">Hieno kappale</option>
-            <option value="2">Huono kappale</option>
-          </select>
-        </FormField>
+        <SongSelection chosenId={formData.songId} setProperty={setFormProperty} />
 
-        <PitchSelection options={PITCH_OPTIONS} defaultOption={DEFAULT_PITCH} />
+        <PitchSelection
+          options={PITCH_OPTIONS}
+          selectedOption={formData.pitch}
+          setProperty={(value: string) => {
+            setFormProperty('pitch', value);
+          }}
+        />
 
-        <PersonalInfoCheckbox />
+        <PersonalInfoCheckbox
+          checked={formData.allowPersonalInfo}
+          setChecked={(newVal: boolean) => {
+            setFormProperty('allowPersonalInfo', newVal);
+          }}
+        />
 
         <button className="submit-button align-left" type="submit">
           Ilmoittaudu

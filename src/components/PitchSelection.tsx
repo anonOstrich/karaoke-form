@@ -1,33 +1,31 @@
-import { useState } from 'react';
 import './PitchSelection.css';
 
 // Might be an easier option? But what I want: a tsc error if the defaultOption is not possible...
 interface GenericPitchSelectionProps<R extends string, T extends readonly R[]> {
   options: T;
-  defaultOption: T[number];
+  selectedOption: T[number];
+  setProperty: (value: T[number]) => void;
 }
 
 export default function PitchSelection<R extends string, T extends readonly R[]>(
   props: GenericPitchSelectionProps<R, T>,
 ) {
-  const { options, defaultOption } = props;
+  const { options, selectedOption, setProperty } = props;
 
   // Initially: choose with JS. Could be done with pure html / css, too.
 
   // Do the tests in one function?
-  if (defaultOption != null && !options.includes(defaultOption)) {
-    throw new Error(`Default option ${defaultOption} not in options ${options}`);
+  if (selectedOption != null && !options.includes(selectedOption)) {
+    throw new Error(`Default option ${selectedOption} not in options ${options}`);
   }
 
   if (options.length <= 0) {
     throw new Error('Must provide at least one option');
   }
 
-  const [selectedOption, setSelectedOption] = useState(defaultOption);
-
   function createOptionChangeHandler(option: R) {
     return function () {
-      setSelectedOption(option);
+      setProperty(option);
     };
   }
 

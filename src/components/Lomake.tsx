@@ -7,7 +7,7 @@ import './Lomake.css';
 export default function Lomake() {
   return (
     <>
-      <h2>Ilmoittautuminen</h2>
+      <h2>Ilmoittautumislomake</h2>
       <form>
         <FormField>
           <label htmlFor="username" className="required">

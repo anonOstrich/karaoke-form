@@ -1,7 +1,45 @@
+:root {
+  --color-primary: rgb(18, 133, 89);
+  --color-black: #808080;
+  --color-white: #efefef;
+  --max-width: 600px;
+  --border-width: 3px;
+  --rounded: 5px;
+}
+
 body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+/* Some resets */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: var(--rounded);
+  border: var(--border-width) solid var(--color-black);
+  padding: 0.5rem;
+}
+
+.submit-button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: 0.5rem 3rem;
+}
+
+/* Should I have a different files for such utility classes? */
+
+.align-left {
+  align-self: flex-start;
 }

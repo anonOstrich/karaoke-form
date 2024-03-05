@@ -1,0 +1,37 @@
+ul {
+  display: flex;
+  justify-content: center;
+  align-self: flex-start;
+  border-radius: var(--rounded);
+  border: var(--border-width) solid var(--color-black);
+}
+
+li:first-child {
+  border: none;
+}
+
+li:last-child {
+  border: none;
+}
+
+li {
+  border-left: var(--border-width) solid var(--color-black);
+  border-right: var(--border-width) solid var(--color-black);
+}
+
+.selection-button {
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  transition: all 1s;
+  min-width: 2rem;
+}
+
+.selection-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.selected {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}

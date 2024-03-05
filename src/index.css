@@ -1,7 +1,13 @@
 :root {
-  --color-primary: rgb(18, 133, 89);
-  --color-black: #808080;
-  --color-white: #efefef;
+  /* Ilmoittautuminen */
+  --color-heading-font: #4c4c4c;
+  --color-text: #4b4b4b;
+  /* Nimi, kasvokuva */
+  --color-border-light: #a9a9a9;
+  --color-border-medium: #9b9b9b;
+  --color-border-dark: #4a4a4a;
+  --color-primary: #008755;
+  --color-white: #fff;
   --max-width: 600px;
   --border-width: 3px;
   --rounded: 5px;
@@ -13,6 +19,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  color: var(--color-text);
 }
 
 /* Some resets */

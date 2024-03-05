@@ -3,7 +3,7 @@ ul {
   justify-content: center;
   align-self: flex-start;
   border-radius: var(--rounded);
-  border: var(--border-width) solid var(--color-black);
+  border: var(--border-width) solid var(--color-border-dark);
 }
 
 li:first-child {
@@ -15,8 +15,8 @@ li:last-child {
 }
 
 li {
-  border-left: var(--border-width) solid var(--color-black);
-  border-right: var(--border-width) solid var(--color-black);
+  border-left: var(--border-width) solid var(--color-border-dark);
+  border-right: var(--border-width) solid var(--color-border-dark);
 }
 
 .selection-button {

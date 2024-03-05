@@ -1,0 +1,29 @@
+select {
+  border: var(--border-width) solid var(--color-border-light);
+  padding-left: 1rem;
+  padding-right: 2rem;
+  font-weight: 800;
+  appearance: none;
+  width: 100%;
+}
+
+.select-container {
+  position: relative;
+}
+
+.select-container::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  border-right: 2px solid var(--color-border-light);
+  border-bottom: 2px solid var(--color-border-light);
+  top: 45%;
+  right: 1.4rem;
+  color: var(--color-border-light);
+  transform-origin: middle middle;
+  /* If the angle doesn't look right: before and after, two lines */
+  transform: translateY(-50%) rotate(45deg);
+  pointer-events: none;
+}

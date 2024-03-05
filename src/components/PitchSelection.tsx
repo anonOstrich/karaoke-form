@@ -66,7 +66,7 @@ function PitchRadioOption({ option, callback, selected }: PitchRadioOptionProps)
         callback();
       }}
     >
-      <input type="radio" name="pitch" value={option} id={`pitch${option}`} onChange={callback} />
+      <input type="radio" name="pitch" value={option} id={`pitch${option}`} onChange={callback} checked={selected} />
       <label htmlFor={`pitch${option}`}>{option}</label>
     </button>
   );

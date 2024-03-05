@@ -4,6 +4,9 @@ import FormField from './FormField';
 
 import './Lomake.css';
 
+const PITCH_OPTIONS = ['-2', '-1', '0', '+1', '+2'] as const;
+const DEFAULT_PITCH = '0';
+
 export default function Lomake() {
   return (
     <>
@@ -29,7 +32,7 @@ export default function Lomake() {
           </select>
         </FormField>
 
-        <PitchSelection options={['-1', '0', '+1']} defaultOption={'0'} />
+        <PitchSelection options={PITCH_OPTIONS} defaultOption={DEFAULT_PITCH} />
 
         <PersonalInfoCheckbox />
 

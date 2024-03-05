@@ -6,16 +6,11 @@ ul {
   border: var(--border-width) solid var(--color-border-dark);
 }
 
-li:first-child {
-  border: none;
-}
-
 li:last-child {
   border: none;
 }
 
 li {
-  border-left: var(--border-width) solid var(--color-border-dark);
   border-right: var(--border-width) solid var(--color-border-dark);
 }
 

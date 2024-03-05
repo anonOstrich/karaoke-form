@@ -13,7 +13,6 @@ fieldset {
 }
 
 legend {
-  font-size: 0.8rem;
   /* Was difficult to position the legend, followed this trick: https://stackoverflow.com/questions/5818960/why-wont-my-legend-element-display-inline */
   float: left;
 }
@@ -47,7 +46,8 @@ legend {
 
 .radio-button-container label {
   cursor: inherit;
-  font-size: 1rem;
+  font-size: 0.6rem;
+  font-weight: 400;
 }
 
 .radio-button-container input {

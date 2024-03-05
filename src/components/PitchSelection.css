@@ -38,6 +38,7 @@ legend {
   min-width: 1.8rem;
   transition: all 0.2s;
   color: var(--color-border-medium);
+  text-align: center;
 }
 
 .radio-button-container:last-child {
@@ -51,6 +52,7 @@ legend {
 
 .radio-button-container input {
   appearance: none;
+  margin: 0;
 }
 
 .radio-button-container-selected {

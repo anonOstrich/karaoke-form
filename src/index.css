@@ -8,9 +8,16 @@
   --color-border-dark: #4a4a4a;
   --color-primary: #008755;
   --color-white: #fff;
+  --height-input: 2.7rem;
   --max-width: 600px;
   --border-width: 3px;
   --rounded: 5px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 h1,
@@ -58,4 +65,15 @@ button {
 
 label {
   font-size: 0.8rem;
+}
+
+input {
+  padding: 0;
+  margin: 0;
+}
+
+input,
+select {
+  min-height: var(--height-input);
+  border-radius: var(--rounded);
 }

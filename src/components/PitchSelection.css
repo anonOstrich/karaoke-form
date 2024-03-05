@@ -25,6 +25,7 @@ legend {
   align-items: stretch;
   border: var(--border-width) solid var(--color-border-dark);
   border-radius: var(--rounded);
+  min-height: var(--height-input);
 }
 
 .radio-buttons-parent:focus-within {
@@ -52,7 +53,9 @@ legend {
 
 .radio-button-container input {
   appearance: none;
-  margin: 0;
+  position: fixed;
+  left: -1000px;
+  top: -1000px;
 }
 
 .radio-button-container-selected {

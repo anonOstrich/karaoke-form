@@ -6,18 +6,24 @@ fieldset {
   border: none;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: stretch;
-  /*doesn't seem to do anythign...*/
-  /*gap: 1rem;*/
+  gap: 4px;
   text-align: left;
 }
 
+legend {
+  font-size: 0.8rem;
+  /* Was difficult to position the legend, followed this trick: https://stackoverflow.com/questions/5818960/why-wont-my-legend-element-display-inline */
+  float: left;
+}
+
 .radio-buttons-parent {
-  /*Temporary fix for spacing*/
-  margin-top: 0.8rem;
-  display: flex;
+  display: grid;
+  /* TODO: should this be for variable number of options? */
+  grid-template-columns: repeat(5, 1fr);
   justify-content: center;
-  width: max-content;
+  align-items: stretch;
   border: var(--border-width) solid var(--color-border-dark);
   border-radius: var(--rounded);
 }
@@ -40,6 +46,7 @@ fieldset {
 
 .radio-button-container label {
   cursor: inherit;
+  font-size: 1rem;
 }
 
 .radio-button-container input {

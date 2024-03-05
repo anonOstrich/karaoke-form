@@ -33,9 +33,7 @@ export default function PitchSelection<R extends string, T extends readonly R[]>
 
   return (
     <fieldset>
-      <legend className="required" style={{ display: 'block' }}>
-        Sävellaji
-      </legend>
+      <legend className="required">Sävellaji</legend>
       <div className="radio-buttons-parent">
         {options.map((option) => {
           return (

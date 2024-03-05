@@ -1,6 +1,13 @@
-h2 {
+.form-title {
   color: var(--color-heading-font);
   font-weight: 400;
+  font-size: 1.1rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 form {
@@ -10,8 +17,15 @@ form {
   gap: 1rem;
 }
 
-form label {
+form label,
+form legend {
   text-align: left;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+input[type='text'] {
+  border: 1px solid var(--color-border-light);
 }
 
 .required::after {
@@ -22,4 +36,8 @@ form label {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+.submit-button {
+  margin-top: 0.5rem;
 }

@@ -39,8 +39,9 @@ export default function Lomake() {
   }
 
   return (
-    <>
-      <h2>Ilmoittautumislomake</h2>
+    <div className="form-container">
+      {/* Idea: choose the heading level dynamically based on the prop?? How could I know what the user has around the component */}
+      <h1 className="form-title">Ilmoittautumislomake</h1>
       <form onSubmit={handleFormSubmit}>
         <FormField>
           <label htmlFor="username" className="required">
@@ -77,6 +78,6 @@ export default function Lomake() {
           Ilmoittaudu
         </button>
       </form>
-    </>
+    </div>
   );
 }

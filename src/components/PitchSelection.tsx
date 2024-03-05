@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import FormField from './FormField';
 import './PitchSelection.css';
 
 // Might be an easier option? But what I want: a tsc error if the defaultOption is not possible...
@@ -13,6 +12,8 @@ export default function PitchSelection<R extends string, T extends readonly R[]>
 ) {
   const { options, defaultOption } = props;
 
+  // Initially: choose with JS. Could be done with pure html / css, too.
+
   // Do the tests in one function?
   if (defaultOption != null && !options.includes(defaultOption)) {
     throw new Error(`Default option ${defaultOption} not in options ${options}`);
@@ -22,48 +23,53 @@ export default function PitchSelection<R extends string, T extends readonly R[]>
     throw new Error('Must provide at least one option');
   }
 
-  const [pitch, setPitch] = useState(defaultOption ?? options[0]);
+  const [selectedOption, setSelectedOption] = useState(defaultOption);
+
+  function createOptionChangeHandler(option: R) {
+    return function () {
+      setSelectedOption(option);
+    };
+  }
 
   return (
-    <FormField>
-      <label className="required" htmlFor="pitch">
+    <fieldset>
+      <legend className="required" style={{ display: 'block' }}>
         Sävellaji
-      </label>
-      <ul id="pitch">
-        {
-          // elements not rearranged, so idx is suitable for key
-          options.map((option, idx) => (
-            <li key={idx}>
-              <PitchOption
-                isSelected={option === pitch}
-                handleSelection={(e) => {
-                  // Browser will otherwise comment on the validation of other fields
-                  e.preventDefault();
-                  setPitch(option);
-                }}
-              >
-                {option}
-              </PitchOption>
-            </li>
-          ))
-        }
-      </ul>
-    </FormField>
+      </legend>
+      <div className="radio-buttons-parent">
+        {options.map((option) => {
+          return (
+            <PitchRadioOption
+              key={option}
+              option={option}
+              selected={option === selectedOption}
+              callback={createOptionChangeHandler(option)}
+            />
+          );
+        })}
+      </div>
+    </fieldset>
   );
 }
 
-type ButtonClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => void;
-
-interface PitchOptionProps {
-  children: React.ReactNode;
-  isSelected: boolean;
-  handleSelection: ButtonClickHandler;
+interface PitchRadioOptionProps {
+  option: string;
+  selected: boolean;
+  callback: () => void;
 }
 
-function PitchOption({ children, isSelected, handleSelection }: PitchOptionProps) {
+function PitchRadioOption({ option, callback, selected }: PitchRadioOptionProps) {
   return (
-    <button className={`selection-button ${isSelected ? 'selected' : ''}`} onClick={handleSelection}>
-      {children}
+    <button
+      tabIndex={-1}
+      className={`radio-button-container ${selected ? 'radio-button-container-selected' : ''}`}
+      onClick={(e) => {
+        e.preventDefault();
+        callback();
+      }}
+    >
+      <input type="radio" name="pitch" value={option} id={`pitch${option}`} onChange={callback} />
+      <label htmlFor={`pitch${option}`}>{option}</label>
     </button>
   );
 }

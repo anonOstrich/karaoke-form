@@ -5,6 +5,7 @@ import FormField from './FormField';
 import './Lomake.css';
 import SongSelection from './SongSelection';
 import { useState, FormEvent as ReactFormEvent } from 'react';
+import { getAvailableSongs } from '../utils/test-data';
 
 const PITCH_OPTIONS = ['-2', '-1', '0', '+1', '+2'] as const;
 type Pitch = (typeof PITCH_OPTIONS)[number];
@@ -55,7 +56,7 @@ export default function Lomake() {
           />
         </FormField>
 
-        <SongSelection chosenId={formData.songId} setProperty={setFormProperty} />
+        <SongSelection chosenId={formData.songId} setProperty={setFormProperty} songs={getAvailableSongs()} />
 
         <PitchSelection
           options={PITCH_OPTIONS}

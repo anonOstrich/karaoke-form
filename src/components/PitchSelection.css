@@ -47,8 +47,8 @@ legend {
 
 .radio-button-container label {
   cursor: inherit;
-  font-size: 0.6rem;
-  font-weight: 400;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
 .radio-button-container input {

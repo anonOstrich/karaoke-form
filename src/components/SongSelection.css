@@ -2,8 +2,9 @@ select {
   border: var(--border-width) solid var(--color-border-light);
   padding-left: 1rem;
   padding-right: 2rem;
-  font-weight: 800;
+  font-weight: 600;
   appearance: none;
+  color: var(--color-border-dark);
   width: 100%;
 }
 

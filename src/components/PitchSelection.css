@@ -23,8 +23,6 @@ legend {
   grid-template-columns: repeat(5, 1fr);
   justify-content: center;
   align-items: stretch;
-  border: var(--border-width) solid var(--color-border-dark);
-  border-radius: var(--rounded);
   min-height: var(--height-input);
 }
 
@@ -33,22 +31,29 @@ legend {
 }
 
 .radio-button-container {
-  border-radius: 0px;
-  border-right: var(--border-width) solid var(--color-border-dark);
   min-width: 1.8rem;
   transition: all 0.2s;
   color: var(--color-border-medium);
   text-align: center;
+  border: var(--border-width) solid var(--color-border-dark);
+  border-left: none;
+}
+
+.radio-button-container:first-child {
+  border-top-left-radius: var(--rounded);
+  border-bottom-left-radius: var(--rounded);
+  border-left: var(--border-width) solid var(--color-border-dark);
 }
 
 .radio-button-container:last-child {
-  border-right: none;
+  border-top-right-radius: var(--rounded);
+  border-bottom-right-radius: var(--rounded);
 }
 
 .radio-button-container label {
   cursor: inherit;
-  font-size: 0.6rem;
-  font-weight: 400;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
 .radio-button-container input {
@@ -61,4 +66,10 @@ legend {
 .radio-button-container-selected {
   background-color: var(--color-primary);
   color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+button[type='submit'] {
+  border-radius: var(--rounded);
+  font-family: inherit;
 }

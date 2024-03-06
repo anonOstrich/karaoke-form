@@ -36,7 +36,7 @@ export default function SongSelection(props: SongSelectionProps) {
           required
         >
           <option value="" hidden>
-            Valitse biisi
+            Valitse alta
           </option>
 
           {sortedSongs.map((song) => (

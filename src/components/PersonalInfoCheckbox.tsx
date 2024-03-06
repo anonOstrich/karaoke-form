@@ -3,9 +3,10 @@ import './PersonalInfoCheckbox.css';
 interface PersonalInfoCheckboxProps {
   checked: boolean;
   setChecked: (newVal: boolean) => void;
+  disabled?: boolean;
 }
 
-export default function PersonalInfoCheckbox({ checked, setChecked }: PersonalInfoCheckboxProps) {
+export default function PersonalInfoCheckbox({ checked, setChecked, disabled }: PersonalInfoCheckboxProps) {
   return (
     <div className="checkbox-container">
       <label htmlFor="allow-personal-info">Sallin tietojeni tallentamisen karaokejärjestelmään.</label>
@@ -18,6 +19,7 @@ export default function PersonalInfoCheckbox({ checked, setChecked }: PersonalIn
         onChange={() => {
           setChecked(!checked);
         }}
+        disabled={disabled}
       />
     </div>
   );

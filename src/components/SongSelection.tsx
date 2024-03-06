@@ -8,6 +8,7 @@ interface SongSelectionProps {
   chosenId: string | null;
   setProperty: (propertyName: FormDataKey, newValue: string) => void;
   songs: Song[];
+  disabled?: boolean;
 }
 
 // Could create different functions for sorting
@@ -18,7 +19,7 @@ function titleAlphabeticalSorter(a: Song, b: Song) {
 }
 
 export default function SongSelection(props: SongSelectionProps) {
-  const { chosenId, setProperty, songs } = props;
+  const { chosenId, setProperty, songs, disabled } = props;
 
   const sortedSongs = songs.sort(titleAlphabeticalSorter);
 
@@ -34,6 +35,7 @@ export default function SongSelection(props: SongSelectionProps) {
           value={chosenId ?? undefined}
           onChange={(e) => setProperty('songId', e.target.value)}
           required
+          disabled={disabled}
         >
           <option value="" hidden>
             Valitse alta

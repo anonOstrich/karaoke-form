@@ -1,8 +1,9 @@
 .checkbox-container {
   align-self: flex-start;
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
+  flex-direction: row-reverse;
+  justify-content: center;
   gap: 0.5rem;
   font-size: 0.8rem;
 }
@@ -13,6 +14,23 @@
 }
 
 .checkbox {
+  appearance: none;
   width: 1.5rem;
   height: 1.5rem;
+  font-size: 1.4rem;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--rounded);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* TODO: decide on a color, or try to apply the default color for accent-color of a checkbox input */
+.checkbox:checked {
+  background-color: blueviolet;
+}
+
+.checkbox:checked::after {
+  content: '✔';
+  color: var(--color-white);
 }

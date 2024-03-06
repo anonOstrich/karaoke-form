@@ -69,7 +69,8 @@ input {
   margin: 0;
 }
 
-input,
+/* might just be a bad idea to create such wide styles, expecially since inputs differ so much... */
+input:not([type='checkbox']),
 select {
   min-height: var(--height-input);
   border-radius: var(--rounded);

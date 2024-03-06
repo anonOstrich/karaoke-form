@@ -45,16 +45,13 @@ button {
   border: none;
   cursor: pointer;
   background-color: transparent;
-  border-radius: var(--rounded);
-  border: var(--border-width) solid var(--color-black);
-  padding: 0.5rem;
+  font-family: inherit;
 }
 
 .submit-button {
   background-color: var(--color-primary);
   color: var(--color-white);
-  border: none;
-  padding: 0.5rem 3rem;
+  padding: 0.8rem 2.5rem;
 }
 
 /* Should I have a different files for such utility classes? */

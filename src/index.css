@@ -69,6 +69,19 @@ input {
   margin: 0;
 }
 
+/* Note: might want to transition other properties, too... */
+button,
+input,
+select {
+  transition: filter 0.3s;
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+  filter: brightness(50%);
+}
+
 /* might just be a bad idea to create such wide styles, expecially since inputs differ so much... */
 input:not([type='checkbox']),
 select {

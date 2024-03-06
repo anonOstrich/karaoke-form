@@ -5,12 +5,13 @@ interface GenericPitchSelectionProps<R extends string, T extends readonly R[]> {
   options: T;
   selectedOption: T[number];
   setProperty: (value: T[number]) => void;
+  disabled?: boolean;
 }
 
 export default function PitchSelection<R extends string, T extends readonly R[]>(
   props: GenericPitchSelectionProps<R, T>,
 ) {
-  const { options, selectedOption, setProperty } = props;
+  const { options, selectedOption, setProperty, disabled } = props;
 
   // Initially: choose with JS. Could be done with pure html / css, too.
 
@@ -30,7 +31,7 @@ export default function PitchSelection<R extends string, T extends readonly R[]>
   }
 
   return (
-    <fieldset>
+    <fieldset disabled={disabled}>
       <legend className="required">Sävellaji</legend>
       <div className="radio-buttons-parent">
         {options.map((option) => {
@@ -63,6 +64,7 @@ function PitchRadioOption({ option, callback, selected }: PitchRadioOptionProps)
         e.preventDefault();
         callback();
       }}
+
     >
       <input type="radio" name="pitch" value={option} id={`pitch${option}`} onChange={callback} checked={selected} />
       <label htmlFor={`pitch${option}`}>{option}</label>

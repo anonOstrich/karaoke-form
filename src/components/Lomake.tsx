@@ -6,6 +6,7 @@ import './Lomake.css';
 import SongSelection from './SongSelection';
 import { useState, FormEvent as ReactFormEvent } from 'react';
 import { getAvailableSongs } from '../utils/test-data';
+import { promiseWait } from '../utils/timers';
 
 const PITCH_OPTIONS = ['-2', '-1', '0', '+1', '+2'] as const;
 type Pitch = (typeof PITCH_OPTIONS)[number];
@@ -28,14 +29,24 @@ export default function Lomake() {
     allowPersonalInfo: false,
   });
 
+  const [loading, setLoading] = useState(false);
+
   /* TODO: this is NOT as typesafe as you'd expect! Choose to live with it or else do runtime checks? Although I'm pretty sure it could be done at compoile time as well... */
   function setFormProperty(propertyName: FormDataKey, newValue: FormData[FormDataKey]) {
     setFormData({ ...formData, [propertyName]: newValue });
   }
 
-  function handleFormSubmit(e: ReactFormEvent<HTMLFormElement>) {
+  async function handleFormSubmit(e: ReactFormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log(JSON.stringify(formData, null, 2));
+    setLoading(true);
+    try {
+      await promiseWait(5000);
+    } catch (e: unknown) {
+      // Handle error
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -54,10 +65,11 @@ export default function Lomake() {
             value={formData.username}
             onChange={(e) => setFormProperty('username', e.target.value)}
             required
+            disabled={loading}
           />
         </FormField>
 
-        <SongSelection chosenId={formData.songId} setProperty={setFormProperty} songs={getAvailableSongs()} />
+        <SongSelection chosenId={formData.songId} setProperty={setFormProperty} songs={getAvailableSongs()} disabled={loading} />
 
         <PitchSelection
           options={PITCH_OPTIONS}
@@ -65,6 +77,7 @@ export default function Lomake() {
           setProperty={(value: string) => {
             setFormProperty('pitch', value);
           }}
+          disabled={loading}
         />
 
         <PersonalInfoCheckbox
@@ -72,9 +85,10 @@ export default function Lomake() {
           setChecked={(newVal: boolean) => {
             setFormProperty('allowPersonalInfo', newVal);
           }}
+          disabled={loading}
         />
 
-        <button className="submit-button align-left" type="submit">
+        <button className="submit-button align-left" type="submit" disabled={loading}>
           Ilmoittaudu
         </button>
       </form>

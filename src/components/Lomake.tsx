@@ -42,9 +42,10 @@ export default function Lomake() {
     console.log(JSON.stringify(formData, null, 2));
     setLoading(true);
     try {
+      // This delay could be read from environment variables, for instance? Right now just hardcoded in the middle of a long function...
       await promiseWait(5000);
     } catch (e: unknown) {
-      // Handle error
+      // Handle possible errors with communicating with backend, or whatever is done on submission
     } finally {
       setLoading(false)
     }

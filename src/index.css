@@ -7,6 +7,7 @@
   --color-border-medium: #9b9b9b;
   --color-border-dark: #4a4a4a;
   --color-primary: #008755;
+  --color-primary-light: #dff0d8;
   --color-white: #fff;
   --height-input: 3rem;
   --max-width: 600px;
@@ -89,4 +90,10 @@ select {
   border-radius: var(--rounded);
   font-family: inherit;
   padding: 0.5rem 1rem;
+}
+
+.screen-reader-only {
+  visibility: hidden;
+  position: absolute;
+  left: -2000px;
 }

@@ -7,6 +7,7 @@ import SongSelection from './SongSelection';
 import { useState, FormEvent as ReactFormEvent } from 'react';
 import { getAvailableSongs } from '../utils/test-data';
 import { promiseWait } from '../utils/timers';
+import Loader from './Loader';
 
 const PITCH_OPTIONS = ['-2', '-1', '0', '+1', '+2'] as const;
 type Pitch = (typeof PITCH_OPTIONS)[number];
@@ -91,6 +92,8 @@ export default function Lomake() {
         <button className="submit-button align-left" type="submit" disabled={loading}>
           Ilmoittaudu
         </button>
+
+        {loading && <Loader />}
       </form>
     </div>
   );

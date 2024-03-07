@@ -9,7 +9,7 @@
   --color-danger: #d6302a;
   --color-white: #fff;
   --color-checkbox-bg: #ad40d9;
-  --color-outline-fallback: #rgb(77, 144, 254);
+  --color-outline-fallback: rgb(77, 144, 254);
   --height-input: 3rem;
   --max-width: 600px;
   --border-width: 2px;

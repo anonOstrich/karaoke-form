@@ -8,6 +8,10 @@
   appearance: none;
 }
 
+.select-container select option {
+  width: 100%;
+}
+
 .select-container {
   position: relative;
 }

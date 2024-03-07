@@ -1,0 +1,16 @@
+.selfie-container input {
+  opacity: 0;
+  position: absolute;
+  left: -9999px;
+}
+
+.selfie-preview {
+  cursor: pointer;
+  height: var(--height-input);
+  border-radius: var(--rounded);
+  border: 2px dashed var(--color-border-light);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

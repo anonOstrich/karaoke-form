@@ -75,6 +75,7 @@ export default function Lomake() {
             Nimi tai nimimerkki
           </label>
           <input
+            className="username-input"
             type="text"
             name="username"
             id="username"

@@ -1,4 +1,5 @@
 import './PersonalInfoCheckbox.css';
+import CheckSolid from '../assets/CheckSolid';
 
 interface PersonalInfoCheckboxProps {
   checked: boolean;
@@ -8,19 +9,24 @@ interface PersonalInfoCheckboxProps {
 
 export default function PersonalInfoCheckbox({ checked, setChecked, disabled }: PersonalInfoCheckboxProps) {
   return (
-    <div className="checkbox-container">
-      <label htmlFor="allow-personal-info">Sallin tietojeni tallentamisen karaokejärjestelmään.</label>
-      <input
-        type="checkbox"
-        className="checkbox"
-        name="allow-personal-info"
-        id="allow-personal-info"
-        checked={checked}
-        onChange={() => {
-          setChecked(!checked);
-        }}
-        disabled={disabled}
-      />
-    </div>
+    <>
+      <label htmlFor="allow-personal-info" className="checkbox-container">
+        Sallin tietojeni tallentamisen karaokejärjestelmään.
+        <input
+          type="checkbox"
+          className="checkbox"
+          name="allow-personal-info"
+          id="allow-personal-info"
+          checked={checked}
+          onChange={() => {
+            setChecked(!checked);
+          }}
+          disabled={disabled}
+        />
+        <div className="icon-container">
+          <CheckSolid />
+        </div>
+      </label>
+    </>
   );
 }

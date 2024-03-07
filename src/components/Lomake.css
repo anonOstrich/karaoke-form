@@ -1,3 +1,13 @@
+.submit-button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.8rem 2.5rem;
+}
+
+.submit-button:disabled {
+  filter: opacity(0.6);
+}
+
 .form-title {
   color: var(--color-heading-font);
   font-weight: 500;

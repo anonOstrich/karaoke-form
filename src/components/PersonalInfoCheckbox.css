@@ -6,35 +6,45 @@
   justify-content: center;
   gap: 0.5rem;
   font-size: 0.8rem;
-}
-
-.checkbox-container label {
   font-size: 0.8rem;
   font-weight: 500;
 }
 
-.checkbox {
-  appearance: none;
+.icon-container {
   width: 1.5rem;
   height: 1.5rem;
-  font-size: 1.4rem;
+  background-color: transparent;
   border: 1px solid var(--color-border-light);
   border-radius: var(--rounded);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-/* TODO: decide on a color, or try to apply the default color for accent-color of a checkbox input */
-.checkbox:checked {
+.checkbox:checked + .icon-container {
   background-color: blueviolet;
 }
 
-.checkbox:checked::after {
-  content: '✔';
-  color: white;
+.checkbox:checked + .icon-container svg {
+  fill: white;
 }
 
-.checkbox:disabled {
-  background-color: rgba(0, 0, 0, 0.1);
+.checkbox:disabled + .icon-container {
+  filter: brightness(0.8);
+  cursor: not-allowed;
+}
+
+.checkbox:disabled:not(:checked) + .icon-container {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.icon-container svg {
+  height: 80%;
+  width: 80%;
+  fill: transparent;
+}
+
+.checkbox {
+  position: fixed;
+  left: -9999px;
 }

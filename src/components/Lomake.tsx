@@ -90,6 +90,7 @@ export default function Lomake() {
           setImageBlob={(newBlob: string | null) => {
             setFormProperty('imageBlob', newBlob);
           }}
+          disabled={loading}
         />
 
         <SongSelection

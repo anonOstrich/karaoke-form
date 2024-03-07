@@ -6,12 +6,13 @@ import './SelfieInput.css';
 interface SelfieInputProps {
   imageBlob: string | null;
   setImageBlob: (newBlob: string | null) => void;
+  disabled?: boolean;
 }
 
 /*
  * Approach inspired by MDN example: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  */
-export default function SelfieInput({ imageBlob, setImageBlob }: SelfieInputProps) {
+export default function SelfieInput({ imageBlob, setImageBlob, disabled }: SelfieInputProps) {
   const [displayImage, setDisplayImage] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState('gray');
 
@@ -69,6 +70,7 @@ export default function SelfieInput({ imageBlob, setImageBlob }: SelfieInputProp
         accept="image/png,image/jpeg,image/jpg"
         capture="user"
         onChange={displayImageFile}
+        disabled={disabled}
       />
       <label className="selfie-label" htmlFor="selfie">
         <div className="selfie-visible-input">{displayImage ? '+ Vaihda kasvokuva' : '+ Tuo kasvokuva'}</div>

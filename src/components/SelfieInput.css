@@ -1,0 +1,73 @@
+.selfie-container input {
+  opacity: 0;
+  position: absolute;
+  left: -9999px;
+}
+
+.selfie-visible-input {
+  cursor: pointer;
+  height: var(--height-input);
+  border-bottom-left-radius: var(--rounded);
+  border-bottom-right-radius: var(--rounded);
+  border: 2px dashed var(--color-border-light);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selfie-preview {
+  display: none;
+  position: relative;
+  width: 100%;
+  margin: 0 0;
+  height: 25rem;
+  border: 2px dashed var(--color-border-light);
+  border-bottom: none;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
+}
+
+.selfie-preview-display {
+  display: flex;
+}
+
+.selfie-preview img {
+  display: none;
+}
+
+.selfie-preview-display span {
+  display: none;
+}
+
+.selfie-preview-display img {
+  display: block;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+.selfie-preview button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--color-danger);
+  border-bottom-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
+  color: var(--color-white);
+  width: 3rem;
+  height: 3rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+}
+
+.selfie-preview button:focus,
+.selfie-preview button:hover {
+  filter: brightness(1.1);
+  font-size: 120%;
+}
+
+input:focus + .selfie-label .selfie-visible-input {
+  outline: 5px auto -webkit-focus-ring-color;
+}

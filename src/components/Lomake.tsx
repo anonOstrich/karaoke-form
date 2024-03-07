@@ -8,6 +8,7 @@ import { useState, FormEvent as ReactFormEvent } from 'react';
 import { getAvailableSongs } from '../utils/test-data';
 import { promiseWait } from '../utils/timers';
 import Loader from './Loader';
+import SelfieInput from './SelfieInput';
 
 const PITCH_OPTIONS = ['-2', '-1', '0', '+1', '+2'] as const;
 type Pitch = (typeof PITCH_OPTIONS)[number];
@@ -16,6 +17,7 @@ const DEFAULT_PITCH = '0';
 interface FormData {
   username: string;
   songId: string | null;
+  imageBlob: string | null;
   pitch: Pitch;
   allowPersonalInfo: boolean;
 }
@@ -26,6 +28,7 @@ export default function Lomake() {
   const [formData, setFormData] = useState<FormData>({
     username: '',
     songId: null,
+    imageBlob: null,
     pitch: DEFAULT_PITCH,
     allowPersonalInfo: false,
   });
@@ -39,6 +42,7 @@ export default function Lomake() {
 
   async function handleFormSubmit(e: ReactFormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Would need to convert the image data url for the backend
     console.log(JSON.stringify(formData, null, 2));
     setLoading(true);
     try {
@@ -47,7 +51,7 @@ export default function Lomake() {
     } catch (e: unknown) {
       // Handle possible errors with communicating with backend, or whatever is done on submission
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -71,7 +75,19 @@ export default function Lomake() {
           />
         </FormField>
 
-        <SongSelection chosenId={formData.songId} setProperty={setFormProperty} songs={getAvailableSongs()} disabled={loading} />
+        <SelfieInput
+          imageBlob={formData.imageBlob}
+          setImageBlob={(newBlob: string | null) => {
+            setFormProperty('imageBlob', newBlob);
+          }}
+        />
+
+        <SongSelection
+          chosenId={formData.songId}
+          setProperty={setFormProperty}
+          songs={getAvailableSongs()}
+          disabled={loading}
+        />
 
         <PitchSelection
           options={PITCH_OPTIONS}

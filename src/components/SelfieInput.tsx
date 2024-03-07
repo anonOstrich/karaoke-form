@@ -1,5 +1,5 @@
 import { calculateBackgroundColor } from '../utils/color-utils';
-import { ChangeEvent as ReactChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent as ReactChangeEvent, useRef, useState } from 'react';
 
 import './SelfieInput.css';
 

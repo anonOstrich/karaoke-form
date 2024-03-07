@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent as ReactChangeEvent, useState } from 'react';
 import './SelfieInput.css';
 
 /*
@@ -6,14 +6,49 @@ import './SelfieInput.css';
  */
 export default function SelfieInput() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const displayImage = imageSrc != null;
+  const [displayImage, setDisplayImage] = useState(false);
+
+  function resetImage() {
+    setImageSrc(null);
+    setDisplayImage(false);
+  }
+
+  function displayImageFile(e: ReactChangeEvent<HTMLInputElement>) {
+    const fileInfos = e.target.files;
+    if (fileInfos == null) return;
+
+    const firstFile = fileInfos[0];
+
+    const blob = URL.createObjectURL(firstFile);
+    setImageSrc(blob);
+  }
+
+  const previewElement = (
+    <div className={`selfie-preview ${displayImage ? 'selfie-preview-display' : ''}`}>
+      <img
+        alt="Uploaded selfie"
+        src={imageSrc ?? ''}
+        onLoad={() => {
+          setDisplayImage(true);
+        }}
+      />
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          resetImage();
+        }}
+      >
+        X
+      </button>
+    </div>
+  );
 
   return (
     <div className="selfie-container">
+      {previewElement}
       <label htmlFor="selfie">
         <span>Kasvokuva</span>
-        {/* Is this a faux pas? Inside the label it would open the file selection nicely... */}
-        <div className="selfie-visible-input">+ Tuo kasvokuva</div>
+        <div className="selfie-visible-input">{displayImage ? '+ Vaihda kasvokuva' : '+ Tuo kasvokuva'}</div>
       </label>
 
       <input
@@ -22,32 +57,8 @@ export default function SelfieInput() {
         name="selfie"
         accept="image/png,image/jpeg,image/jpg"
         capture="user"
-        onChange={(e) => {
-          console.log('change detected?');
-          console.log(e);
-
-          const fileInfos = e.target.files;
-          if (fileInfos == null) return;
-
-          const firstFile = fileInfos[0];
-          console.log('file uploaded: ', firstFile);
-
-          setImageSrc(URL.createObjectURL(firstFile));
-        }}
+        onChange={displayImageFile}
       />
-
-      <div className={`selfie-preview ${displayImage ? 'selfie-preview-display' : ''}`}>
-        <img alt="Uploaded selfie" src={imageSrc || ''} />
-        <span>Preview here?</span>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            alert('Should remove the file now...');
-          }}
-        >
-          X
-        </button>
-      </div>
     </div>
   );
 }

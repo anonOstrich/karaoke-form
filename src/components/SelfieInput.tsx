@@ -61,7 +61,7 @@ export default function SelfieInput({ objectURL, setObjectURL, disabled }: Selfi
   return (
     <div className="selfie-container">
       {PreviewElement}
-      <label htmlFor="selfie" id="kasvokuva-label">
+      <label htmlFor="selfie" className="section-label">
         Kasvokuva
       </label>
 

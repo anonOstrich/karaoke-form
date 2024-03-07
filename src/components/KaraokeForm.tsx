@@ -17,7 +17,7 @@ import './KaraokeForm.css';
 interface FormData {
   username: string;
   songId: string | null;
-  imageBlob: string | null;
+  imageObjectURL: string | null;
   pitch: Pitch;
   allowPersonalInfo: boolean;
 }
@@ -30,11 +30,11 @@ function formDataIsValid(data: FormData): boolean {
   return trimmed.length > 0 && songId !== null;
 }
 
-export default function Lomake() {
+export default function KaraokeForm() {
   const [formData, setFormData] = useState<FormData>({
     username: '',
     songId: null,
-    imageBlob: null,
+    imageObjectURL: null,
     pitch: DEFAULT_PITCH,
     allowPersonalInfo: false,
   });
@@ -42,7 +42,7 @@ export default function Lomake() {
   const [isIncomplete, setIsIncomplete] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  // TODO: This is not type safe.
+  // TODO: This is not super type safe.
   function setFormProperty(propertyName: FormDataKey, newValue: FormData[FormDataKey]) {
     const newFormData = { ...formData, [propertyName]: newValue };
     setFormData(newFormData);
@@ -51,7 +51,7 @@ export default function Lomake() {
 
   async function handleFormSubmit(e: ReactFormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Would need to convert the image data url for the backend here at latest
+    // Would need to convert the image object url for the backend here at latest
     setIsLoading(true);
     try {
       // Simulating a slow backend
@@ -74,9 +74,9 @@ export default function Lomake() {
         />
 
         <SelfieInput
-          objectURL={formData.imageBlob}
+          objectURL={formData.imageObjectURL}
           setObjectURL={(newBlob: string | null) => {
-            setFormProperty('imageBlob', newBlob);
+            setFormProperty('imageObjectURL', newBlob);
           }}
           disabled={isLoading}
         />

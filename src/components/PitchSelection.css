@@ -21,8 +21,6 @@ fieldset:disabled button:not(.radio-button-container-selected) {
 }
 
 legend {
-  margin-bottom: var(--margin-label);
-
   /* Was difficult to position the legend, followed this trick:
    https://stackoverflow.com/questions/5818960/why-wont-my-legend-element-display-inline */
   float: left;

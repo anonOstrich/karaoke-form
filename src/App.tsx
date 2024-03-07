@@ -1,4 +1,4 @@
-import Lomake from './components/KaraokeForm';
+import KaraokeForm from './components/KaraokeForm';
 
 import './App.css';
 
@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="component-container">
       {/* Set the dimensions with the container */}
-      <Lomake />
+      <KaraokeForm />
     </div>
   );
 }

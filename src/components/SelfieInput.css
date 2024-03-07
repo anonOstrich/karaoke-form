@@ -4,11 +4,6 @@
   left: -9999px;
 }
 
-#kasvokuva-label {
-  display: block;
-  margin-bottom: var(--margin-label);
-}
-
 .selfie-visible-input {
   cursor: pointer;
   height: var(--height-input);

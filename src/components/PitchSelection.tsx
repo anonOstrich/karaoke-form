@@ -30,7 +30,7 @@ export default function PitchSelection<R extends string, T extends readonly R[]>
 
   return (
     <fieldset disabled={disabled}>
-      <legend className="required">Sävellaji</legend>
+      <legend className="required section-label">Sävellaji</legend>
       <div
         className="radio-buttons-parent"
         style={{

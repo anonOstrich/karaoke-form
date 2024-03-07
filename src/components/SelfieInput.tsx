@@ -60,11 +60,7 @@ export default function SelfieInput({ imageBlob, setImageBlob }: SelfieInputProp
 
   return (
     <div className="selfie-container">
-      <label htmlFor="selfie">
-        <span>Kasvokuva</span>
-        {previewElement}
-        <div className="selfie-visible-input">{displayImage ? '+ Vaihda kasvokuva' : '+ Tuo kasvokuva'}</div>
-      </label>
+      {previewElement}
 
       <input
         type="file"
@@ -74,6 +70,10 @@ export default function SelfieInput({ imageBlob, setImageBlob }: SelfieInputProp
         capture="user"
         onChange={displayImageFile}
       />
+      <label className="selfie-label" htmlFor="selfie">
+        <span>Kasvokuva</span>
+        <div className="selfie-visible-input">{displayImage ? '+ Vaihda kasvokuva' : '+ Tuo kasvokuva'}</div>
+      </label>
     </div>
   );
 }

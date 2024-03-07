@@ -60,11 +60,11 @@ export default function SelfieInput({ objectURL, setObjectURL, disabled }: Selfi
 
   return (
     <div className="selfie-container">
-      {PreviewElement}
+
       <label htmlFor="selfie" className="section-label">
         Kasvokuva
       </label>
-
+      {PreviewElement}
       <input
         type="file"
         id="selfie"

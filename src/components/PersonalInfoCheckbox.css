@@ -32,7 +32,7 @@
 
 .checkbox:checked::after {
   content: '✔';
-  color: var(--color-white);
+  color: white;
 }
 
 .checkbox:disabled {

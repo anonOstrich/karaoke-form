@@ -31,7 +31,12 @@ export default function PitchSelection<R extends string, T extends readonly R[]>
   return (
     <fieldset disabled={disabled}>
       <legend className="required">Sävellaji</legend>
-      <div className="radio-buttons-parent">
+      <div
+        className="radio-buttons-parent"
+        style={{
+          gridTemplateColumns: `repeat(${options.length}, 1fr)`,
+        }}
+      >
         {options.map((option) => {
           return (
             <PitchRadioOption

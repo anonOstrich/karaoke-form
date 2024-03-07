@@ -1,30 +1,38 @@
-select {
+.label-song-selection {
+  display: block;
+  margin-bottom: var(--margin-label);
+}
+
+.select-container select {
   border: var(--border-width) solid var(--color-border-light);
   padding-left: 1rem;
   padding-right: 2rem;
   font-weight: 600;
-  appearance: none;
   color: var(--color-border-dark);
   width: 100%;
+  appearance: none;
 }
 
 .select-container {
   position: relative;
 }
 
+/* 
+Custom caret, since will be more flexible to style
+*/
 .select-container::after {
   content: '';
+  position: absolute;
+  color: var(--color-border-light);
   display: block;
   width: 10px;
   height: 10px;
-  position: absolute;
   border-right: 2px solid var(--color-border-light);
   border-bottom: 2px solid var(--color-border-light);
   top: 45%;
   right: 1.4rem;
-  color: var(--color-border-light);
   transform-origin: middle middle;
-  /* If the angle doesn't look right: before and after, two lines */
+  /* If the angle doesn't look right: ::before and ::after, two lines. Or an icon. */
   transform: translateY(-50%) rotate(45deg);
   pointer-events: none;
 }

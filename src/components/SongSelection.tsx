@@ -1,12 +1,11 @@
 import FormField from './FormField';
-import { FormDataKey } from './Lomake';
 import { Song } from '../utils/test-data';
 
 import './SongSelection.css';
 
 interface SongSelectionProps {
   chosenId: string | null;
-  setProperty: (propertyName: FormDataKey, newValue: string) => void;
+  setChosenId: (newValue: string) => void;
   songs: Song[];
   disabled?: boolean;
 }
@@ -19,13 +18,13 @@ function titleAlphabeticalSorter(a: Song, b: Song) {
 }
 
 export default function SongSelection(props: SongSelectionProps) {
-  const { chosenId, setProperty, songs, disabled } = props;
+  const { chosenId, setChosenId, songs, disabled } = props;
 
   const sortedSongs = songs.sort(titleAlphabeticalSorter);
 
   return (
     <FormField>
-      <label htmlFor="song" className="required">
+      <label htmlFor="song" className="label-song-selection required">
         Biisi
       </label>
       <div className="select-container">
@@ -33,7 +32,7 @@ export default function SongSelection(props: SongSelectionProps) {
           name="song"
           id="song"
           value={chosenId ?? undefined}
-          onChange={(e) => setProperty('songId', e.target.value)}
+          onChange={(e) => setChosenId(e.target.value)}
           required
           disabled={disabled}
         >

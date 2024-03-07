@@ -4,22 +4,20 @@ import { ChangeEvent as ReactChangeEvent, useRef, useState } from 'react';
 import './SelfieInput.css';
 
 interface SelfieInputProps {
-  imageBlob: string | null;
-  setImageBlob: (newBlob: string | null) => void;
+  objectURL: string | null;
+  setObjectURL: (newBlob: string | null) => void;
   disabled?: boolean;
 }
 
-/*
- * Approach inspired by MDN example: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
- */
-export default function SelfieInput({ imageBlob, setImageBlob, disabled }: SelfieInputProps) {
+export default function SelfieInput({ objectURL, setObjectURL, disabled }: SelfieInputProps) {
   const [displayImage, setDisplayImage] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState('gray');
 
+  // Helper canvas for calculating color information
   const workingCanvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
 
   function resetImage() {
-    setImageBlob(null);
+    setObjectURL(null);
     setDisplayImage(false);
   }
 
@@ -30,25 +28,26 @@ export default function SelfieInput({ imageBlob, setImageBlob, disabled }: Selfi
     const firstFile = fileInfos[0];
 
     const blob = URL.createObjectURL(firstFile);
-    setImageBlob(blob);
+    setObjectURL(blob);
   }
 
-  const previewElement = (
+  const PreviewElement = (
     <div className={`selfie-preview ${displayImage ? 'selfie-preview-display' : ''}`} style={{ backgroundColor }}>
       <img
         alt="Uploaded selfie"
-        src={imageBlob ?? ''}
+        src={objectURL ?? ''}
         onLoad={(e) => {
           setDisplayImage(true);
           const imgEl = e.target as HTMLImageElement;
 
-          if (imageBlob != null) {
+          if (objectURL != null) {
             const bgColor = calculateBackgroundColor(workingCanvasRef.current, imgEl);
             setBackgroundColor(bgColor);
           }
         }}
       />
       <button
+        className="close-button"
         onClick={(e) => {
           e.preventDefault();
           resetImage();
@@ -61,8 +60,10 @@ export default function SelfieInput({ imageBlob, setImageBlob, disabled }: Selfi
 
   return (
     <div className="selfie-container">
-      <label htmlFor="selfie">Kasvokuva</label>
-      {previewElement}
+      <label htmlFor="selfie" id="kasvokuva-label">
+        Kasvokuva
+      </label>
+      {PreviewElement}
       <input
         type="file"
         id="selfie"

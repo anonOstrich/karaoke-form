@@ -1,4 +1,4 @@
-import Lomake from './components/Lomake';
+import Lomake from './components/KaraokeForm';
 
 import './App.css';
 

@@ -1,5 +1,6 @@
-import './PersonalInfoCheckbox.css';
 import CheckSolid from '../assets/CheckSolid';
+
+import './PersonalInfoCheckbox.css';
 
 interface PersonalInfoCheckboxProps {
   checked: boolean;
@@ -7,6 +8,9 @@ interface PersonalInfoCheckboxProps {
   disabled?: boolean;
 }
 
+/* 
+  Approach: hide the default checkbox and apply styles to the label instead. Allows for more control over the visual look.
+*/
 export default function PersonalInfoCheckbox({ checked, setChecked, disabled }: PersonalInfoCheckboxProps) {
   return (
     <>

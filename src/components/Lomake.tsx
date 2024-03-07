@@ -14,6 +14,12 @@ const PITCH_OPTIONS = ['-2', '-1', '0', '+1', '+2'] as const;
 type Pitch = (typeof PITCH_OPTIONS)[number];
 const DEFAULT_PITCH = '0';
 
+function formDataIsValid(data: FormData): boolean {
+  const { songId, username } = data;
+  const trimmed = username.trim();
+  return trimmed.length > 0 && songId !== null;
+}
+
 interface FormData {
   username: string;
   songId: string | null;
@@ -33,17 +39,21 @@ export default function Lomake() {
     allowPersonalInfo: false,
   });
 
+  const [incomplete, setIncomplete] = useState(true);
+
   const [loading, setLoading] = useState(false);
 
   /* TODO: this is NOT as typesafe as you'd expect! Choose to live with it or else do runtime checks? Although I'm pretty sure it could be done at compoile time as well... */
   function setFormProperty(propertyName: FormDataKey, newValue: FormData[FormDataKey]) {
-    setFormData({ ...formData, [propertyName]: newValue });
+    const newFormData = { ...formData, [propertyName]: newValue };
+    setFormData(newFormData);
+
+    setIncomplete(!formDataIsValid(newFormData));
   }
 
   async function handleFormSubmit(e: ReactFormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Would need to convert the image data url for the backend
-    console.log(JSON.stringify(formData, null, 2));
+    // Would need to convert the image data url for the backend here at latest
     setLoading(true);
     try {
       // This delay could be read from environment variables, for instance? Right now just hardcoded in the middle of a long function...
@@ -80,6 +90,7 @@ export default function Lomake() {
           setImageBlob={(newBlob: string | null) => {
             setFormProperty('imageBlob', newBlob);
           }}
+          disabled={loading}
         />
 
         <SongSelection
@@ -106,7 +117,7 @@ export default function Lomake() {
           disabled={loading}
         />
 
-        <button className="submit-button align-left" type="submit" disabled={loading}>
+        <button className="submit-button align-left" type="submit" disabled={incomplete || loading}>
           Ilmoittaudu
         </button>
 

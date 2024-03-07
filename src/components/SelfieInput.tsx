@@ -1,15 +1,24 @@
-import { ChangeEvent as ReactChangeEvent, useState } from 'react';
+import { calculateBackgroundColor } from '../utils/color-utils';
+import { ChangeEvent as ReactChangeEvent, useEffect, useRef, useState } from 'react';
+
 import './SelfieInput.css';
+
+interface SelfieInputProps {
+  imageBlob: string | null;
+  setImageBlob: (newBlob: string | null) => void;
+}
 
 /*
  * Approach inspired by MDN example: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  */
-export default function SelfieInput() {
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
+export default function SelfieInput({ imageBlob, setImageBlob }: SelfieInputProps) {
   const [displayImage, setDisplayImage] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState('gray');
+
+  const workingCanvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
 
   function resetImage() {
-    setImageSrc(null);
+    setImageBlob(null);
     setDisplayImage(false);
   }
 
@@ -20,16 +29,22 @@ export default function SelfieInput() {
     const firstFile = fileInfos[0];
 
     const blob = URL.createObjectURL(firstFile);
-    setImageSrc(blob);
+    setImageBlob(blob);
   }
 
   const previewElement = (
-    <div className={`selfie-preview ${displayImage ? 'selfie-preview-display' : ''}`}>
+    <div className={`selfie-preview ${displayImage ? 'selfie-preview-display' : ''}`} style={{ backgroundColor }}>
       <img
         alt="Uploaded selfie"
-        src={imageSrc ?? ''}
-        onLoad={() => {
+        src={imageBlob ?? ''}
+        onLoad={(e) => {
           setDisplayImage(true);
+          console.log(e.target);
+          const imgEl = e.target as HTMLImageElement;
+
+          const bgColor = calculateBackgroundColor(workingCanvasRef.current, imgEl, imageBlob);
+
+          setBackgroundColor(bgColor);
         }}
       />
       <button
@@ -45,9 +60,9 @@ export default function SelfieInput() {
 
   return (
     <div className="selfie-container">
-      {previewElement}
       <label htmlFor="selfie">
         <span>Kasvokuva</span>
+        {previewElement}
         <div className="selfie-visible-input">{displayImage ? '+ Vaihda kasvokuva' : '+ Tuo kasvokuva'}</div>
       </label>
 

@@ -17,6 +17,7 @@ const DEFAULT_PITCH = '0';
 interface FormData {
   username: string;
   songId: string | null;
+  imageBlob: string | null;
   pitch: Pitch;
   allowPersonalInfo: boolean;
 }
@@ -27,6 +28,7 @@ export default function Lomake() {
   const [formData, setFormData] = useState<FormData>({
     username: '',
     songId: null,
+    imageBlob: null,
     pitch: DEFAULT_PITCH,
     allowPersonalInfo: false,
   });
@@ -40,6 +42,7 @@ export default function Lomake() {
 
   async function handleFormSubmit(e: ReactFormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Would need to convert the image data url for the backend
     console.log(JSON.stringify(formData, null, 2));
     setLoading(true);
     try {
@@ -72,7 +75,12 @@ export default function Lomake() {
           />
         </FormField>
 
-        <SelfieInput />
+        <SelfieInput
+          imageBlob={formData.imageBlob}
+          setImageBlob={(newBlob: string | null) => {
+            setFormProperty('imageBlob', newBlob);
+          }}
+        />
 
         <SongSelection
           chosenId={formData.songId}

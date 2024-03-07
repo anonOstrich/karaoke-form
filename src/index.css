@@ -82,7 +82,8 @@ select {
 button:disabled,
 input:disabled,
 select:disabled {
-  filter: brightness(50%);
+  filter: brightness(85%);
+  cursor: not-allowed;
 }
 
 /* might just be a bad idea to create such wide styles, expecially since inputs differ so much... */

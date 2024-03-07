@@ -1,8 +1,6 @@
 :root {
-  /* Ilmoittautuminen */
   --color-heading-font: #4c4c4c;
   --color-text: #4b4b4b;
-  /* Nimi, kasvokuva */
   --color-border-light: #a9a9a9;
   --color-border-medium: #9b9b9b;
   --color-border-dark: #4a4a4a;
@@ -10,11 +8,15 @@
   --color-primary-light: #dff0d8;
   --color-danger: #d6302a;
   --color-white: #fff;
+  --color-checkbox-bg: #ad40d9;
+  --color-outline-fallback: #rgb(77, 144, 254);
   --height-input: 3rem;
   --max-width: 600px;
   --border-width: 2px;
   --rounded: 5px;
   --shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
+  --margin-label: 0.5rem;
+  --filter-disabled: brightness(85%);
 }
 
 *,
@@ -51,28 +53,15 @@ button {
   font-family: inherit;
 }
 
-.submit-button {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  padding: 0.8rem 2.5rem;
-}
-
-/* Should I have a different files for such utility classes? */
-
-.align-left {
-  align-self: flex-start;
+input {
+  padding: 0;
+  margin: 0;
 }
 
 label {
   font-size: 0.8rem;
 }
 
-input {
-  padding: 0;
-  margin: 0;
-}
-
-/* Note: might want to transition other properties, too... */
 button,
 input,
 select {
@@ -86,7 +75,6 @@ select:disabled {
   cursor: not-allowed;
 }
 
-/* might just be a bad idea to create such wide styles, expecially since inputs differ so much... */
 input:not([type='checkbox']),
 select {
   min-height: var(--height-input);
@@ -95,8 +83,18 @@ select {
   padding: 0.5rem 1rem;
 }
 
+/* General utility classes */
+
 .screen-reader-only {
   visibility: hidden;
   position: absolute;
   left: -2000px;
+}
+
+.align-left {
+  align-self: flex-start;
+}
+
+.required::after {
+  content: '*';
 }

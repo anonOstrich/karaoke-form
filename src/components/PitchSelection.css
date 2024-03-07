@@ -8,20 +8,23 @@ fieldset {
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  gap: 4px;
   text-align: left;
 }
 
 fieldset:disabled button {
-  filter: brightness(50%);
+  filter: brightness(85%);
 }
 
+/* With white background the disabled state would be identical to enabled */
 fieldset:disabled button:not(.radio-button-container-selected) {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
 legend {
-  /* Was difficult to position the legend, followed this trick: https://stackoverflow.com/questions/5818960/why-wont-my-legend-element-display-inline */
+  margin-bottom: var(--margin-label);
+
+  /* Was difficult to position the legend, followed this trick:
+   https://stackoverflow.com/questions/5818960/why-wont-my-legend-element-display-inline */
   float: left;
 }
 
@@ -35,49 +38,6 @@ legend {
 }
 
 .radio-buttons-parent:focus-within {
+  outline: 5px auto var(--color-outline-fallback);
   outline: 5px auto -webkit-focus-ring-color;
-}
-
-.radio-button-container {
-  min-width: 1.8rem;
-  transition: all 0.2s;
-  color: var(--color-border-medium);
-  text-align: center;
-  border: var(--border-width) solid var(--color-border-dark);
-  border-left: none;
-}
-
-.radio-button-container:first-child {
-  border-top-left-radius: var(--rounded);
-  border-bottom-left-radius: var(--rounded);
-  border-left: var(--border-width) solid var(--color-border-dark);
-}
-
-.radio-button-container:last-child {
-  border-top-right-radius: var(--rounded);
-  border-bottom-right-radius: var(--rounded);
-}
-
-.radio-button-container label {
-  cursor: inherit;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.radio-button-container input {
-  appearance: none;
-  position: fixed;
-  left: -1000px;
-  top: -1000px;
-}
-
-.radio-button-container-selected {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  border-color: var(--color-primary);
-}
-
-button[type='submit'] {
-  border-radius: var(--rounded);
-  font-family: inherit;
 }

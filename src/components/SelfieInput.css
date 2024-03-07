@@ -4,6 +4,11 @@
   left: -9999px;
 }
 
+#kasvokuva-label {
+  display: block;
+  margin-bottom: var(--margin-label);
+}
+
 .selfie-visible-input {
   cursor: pointer;
   height: var(--height-input);
@@ -21,7 +26,7 @@
   position: relative;
   width: 100%;
   margin: 0 0;
-  height: 25rem;
+  height: 20rem;
   border: 2px dashed var(--color-border-light);
   border-bottom: none;
   justify-content: center;
@@ -30,16 +35,11 @@
   border-top-right-radius: var(--rounded);
 }
 
-.selfie-preview-display {
-  display: flex;
-}
-
 .selfie-preview img {
   display: none;
 }
-
-.selfie-preview-display span {
-  display: none;
+.selfie-preview-display {
+  display: flex;
 }
 
 .selfie-preview-display img {
@@ -62,18 +62,19 @@
   transition: all 0.2s;
 }
 
-.selfie-preview button:focus,
-.selfie-preview button:hover {
+.close-button:focus,
+.close-button:hover {
   filter: brightness(1.1);
   font-size: 120%;
 }
 
 input:focus + .selfie-label .selfie-visible-input {
   outline: 5px auto -webkit-focus-ring-color;
+  outline: 5px auto var(--color-outline-fallback);
 }
 
 input:disabled + .selfie-label .selfie-visible-input {
   cursor: not-allowed;
-  filter: brightness(85%);
+  filter: var(--filter-disabled);
   background-color: rgba(0, 0, 0, 0.1);
 }

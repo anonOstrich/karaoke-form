@@ -1,21 +1,19 @@
+import PitchRadioOption from './PitchRadioOption';
 import './PitchSelection.css';
 
-// Might be an easier option? But what I want: a tsc error if the defaultOption is not possible...
-interface GenericPitchSelectionProps<R extends string, T extends readonly R[]> {
+/* 
+  Generics to help ensure that the selected option has the same type as the elements of the options array.
+*/
+interface PitchSelectionProps<R extends string, T extends readonly R[]> {
   options: T;
   selectedOption: T[number];
   setProperty: (value: T[number]) => void;
   disabled?: boolean;
 }
 
-export default function PitchSelection<R extends string, T extends readonly R[]>(
-  props: GenericPitchSelectionProps<R, T>,
-) {
+export default function PitchSelection<R extends string, T extends readonly R[]>(props: PitchSelectionProps<R, T>) {
   const { options, selectedOption, setProperty, disabled } = props;
 
-  // Initially: choose with JS. Could be done with pure html / css, too.
-
-  // Do the tests in one function?
   if (selectedOption != null && !options.includes(selectedOption)) {
     throw new Error(`Default option ${selectedOption} not in options ${options}`);
   }
@@ -46,28 +44,5 @@ export default function PitchSelection<R extends string, T extends readonly R[]>
         })}
       </div>
     </fieldset>
-  );
-}
-
-interface PitchRadioOptionProps {
-  option: string;
-  selected: boolean;
-  callback: () => void;
-}
-
-function PitchRadioOption({ option, callback, selected }: PitchRadioOptionProps) {
-  return (
-    <button
-      tabIndex={-1}
-      className={`radio-button-container ${selected ? 'radio-button-container-selected' : ''}`}
-      onClick={(e) => {
-        e.preventDefault();
-        callback();
-      }}
-
-    >
-      <input type="radio" name="pitch" value={option} id={`pitch${option}`} onChange={callback} checked={selected} />
-      <label htmlFor={`pitch${option}`}>{option}</label>
-    </button>
   );
 }

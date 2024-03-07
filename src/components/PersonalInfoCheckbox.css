@@ -38,6 +38,10 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.checkbox:focus + .icon-container {
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
 .icon-container svg {
   height: 80%;
   width: 80%;
@@ -45,6 +49,5 @@
 }
 
 .checkbox {
-  position: fixed;
-  left: -9999px;
+  appearance: none;
 }

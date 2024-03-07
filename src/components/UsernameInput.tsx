@@ -9,7 +9,7 @@ interface UsernameInputProps {
 export default function UsernameInput({ value, setValue, disabled }: UsernameInputProps) {
   return (
     <FormField>
-      <label htmlFor="username" className="required">
+      <label htmlFor="username" className="required section-label">
         Nimi tai nimimerkki
       </label>
       <input

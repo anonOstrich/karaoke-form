@@ -24,7 +24,7 @@ export default function SongSelection(props: SongSelectionProps) {
 
   return (
     <FormField>
-      <label htmlFor="song" className="label-song-selection required">
+      <label htmlFor="song" className="required section-label">
         Biisi
       </label>
       <div className="select-container">

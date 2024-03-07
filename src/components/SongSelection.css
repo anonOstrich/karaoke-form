@@ -1,8 +1,3 @@
-.label-song-selection {
-  display: block;
-  margin-bottom: var(--margin-label);
-}
-
 .select-container select {
   border: var(--border-width) solid var(--color-border-light);
   padding-left: 1rem;

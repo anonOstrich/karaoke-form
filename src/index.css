@@ -9,7 +9,7 @@
   --color-danger: #d6302a;
   --color-white: #fff;
   --color-checkbox-bg: #ad40d9;
-  --color-outline-fallback: #rgb(77, 144, 254);
+  --color-outline-fallback: rgb(77, 144, 254);
   --height-input: 3rem;
   --max-width: 600px;
   --border-width: 2px;
@@ -81,6 +81,11 @@ select {
   border-radius: var(--rounded);
   font-family: inherit;
   padding: 0.5rem 1rem;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: var(--margin-label);
 }
 
 /* General utility classes */

@@ -4,11 +4,6 @@
   left: -9999px;
 }
 
-#kasvokuva-label {
-  display: block;
-  margin-bottom: var(--margin-label);
-}
-
 .selfie-visible-input {
   cursor: pointer;
   height: var(--height-input);
@@ -69,8 +64,8 @@
 }
 
 input:focus + .selfie-label .selfie-visible-input {
-  outline: 5px auto -webkit-focus-ring-color;
   outline: 5px auto var(--color-outline-fallback);
+  outline: 5px auto -webkit-focus-ring-color;
 }
 
 input:disabled + .selfie-label .selfie-visible-input {

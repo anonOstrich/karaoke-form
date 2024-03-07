@@ -58,11 +58,14 @@
   color: var(--color-white);
   width: 3rem;
   height: 3rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
 }
 
 .selfie-preview button:focus,
 .selfie-preview button:hover {
-  filter: brightness(0.5);
+  filter: brightness(1.1);
+  font-size: 120%;
 }
 
 input:focus + .selfie-label .selfie-visible-input {

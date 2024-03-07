@@ -60,8 +60,8 @@ export default function SelfieInput({ imageBlob, setImageBlob }: SelfieInputProp
 
   return (
     <div className="selfie-container">
+      <label htmlFor="selfie">Kasvokuva</label>
       {previewElement}
-
       <input
         type="file"
         id="selfie"
@@ -71,7 +71,6 @@ export default function SelfieInput({ imageBlob, setImageBlob }: SelfieInputProp
         onChange={displayImageFile}
       />
       <label className="selfie-label" htmlFor="selfie">
-        <span>Kasvokuva</span>
         <div className="selfie-visible-input">{displayImage ? '+ Vaihda kasvokuva' : '+ Tuo kasvokuva'}</div>
       </label>
     </div>

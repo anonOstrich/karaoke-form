@@ -40,12 +40,12 @@ export default function SelfieInput({ imageBlob, setImageBlob, disabled }: Selfi
         src={imageBlob ?? ''}
         onLoad={(e) => {
           setDisplayImage(true);
-          console.log(e.target);
           const imgEl = e.target as HTMLImageElement;
 
-          const bgColor = calculateBackgroundColor(workingCanvasRef.current, imgEl, imageBlob);
-
-          setBackgroundColor(bgColor);
+          if (imageBlob != null) {
+            const bgColor = calculateBackgroundColor(workingCanvasRef.current, imgEl);
+            setBackgroundColor(bgColor);
+          }
         }}
       />
       <button

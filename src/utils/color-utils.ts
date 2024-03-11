@@ -7,7 +7,7 @@
  * @returns
  */
 export function calculateBackgroundColor(canvas: HTMLCanvasElement, imgEl: HTMLImageElement) {
-  const context = canvas.getContext('2d', { willReadFrequently: true });
+  const context = canvas.getContext('2d');
 
   if (context == null) {
     console.error('Canvas context is null');
@@ -18,13 +18,14 @@ export function calculateBackgroundColor(canvas: HTMLCanvasElement, imgEl: HTMLI
   let sumR = 0;
   let sumG = 0;
   let sumB = 0;
-  for (let y = 0; y < canvas.height; y++) {
-    for (let x = 0; x < canvas.width; x++) {
-      const pixelData = context.getImageData(x, y, 1, 1).data;
-      sumR += pixelData[0];
-      sumG += pixelData[1];
-      sumB += pixelData[2];
-    }
+
+  /* How pixels are layed out doesn't matter for this calculation. Each pixel has 4 entries: RGBA (so width * height * 4 elements in the array-like structure)  */
+  const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < imageData.data.length; i += 4) {
+    sumR += imageData.data[i];
+    sumG += imageData.data[i + 1];
+    sumB += imageData.data[i + 2];
   }
 
   const totalPixels = canvas.width * canvas.height;

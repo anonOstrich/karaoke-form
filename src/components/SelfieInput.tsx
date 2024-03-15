@@ -1,25 +1,17 @@
-import { calculateBackgroundColor } from '../utils/color-utils';
-import { ChangeEvent as ReactChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent as ReactChangeEvent } from 'react';
 
 import './SelfieInput.css';
+import { PreviewElement } from './SelfiePreview';
 
+// Would be better to have a useState setter as the setter, since it could also handle an updater function instead of just a value.
 interface SelfieInputProps {
   objectURL: string | null;
-  setObjectURL: (newBlob: string | null) => void;
+  setObjectURL: (x: string | null) => void;
   disabled?: boolean;
 }
 
 export default function SelfieInput({ objectURL, setObjectURL, disabled }: SelfieInputProps) {
-  const [displayImage, setDisplayImage] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState('gray');
-
-  // Helper canvas for calculating color information
-  const workingCanvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
-
-  function resetImage() {
-    setObjectURL(null);
-    setDisplayImage(false);
-  }
+  const displayImage = objectURL != null;
 
   function displayImageFile(e: ReactChangeEvent<HTMLInputElement>) {
     const fileInfos = e.target.files;
@@ -27,44 +19,28 @@ export default function SelfieInput({ objectURL, setObjectURL, disabled }: Selfi
 
     const firstFile = fileInfos[0];
 
-    const blob = URL.createObjectURL(firstFile);
-    setObjectURL(blob);
+    const newObjectURL = URL.createObjectURL(firstFile);
+
+    if (objectURL != null) {
+      URL.revokeObjectURL(objectURL);
+    }
+    setObjectURL(newObjectURL);
   }
-
-  const PreviewElement = (
-    <div className={`selfie-preview ${displayImage ? 'selfie-preview-display' : ''}`} style={{ backgroundColor }}>
-      <img
-        alt="Uploaded selfie"
-        src={objectURL ?? ''}
-        onLoad={(e) => {
-          setDisplayImage(true);
-          const imgEl = e.target as HTMLImageElement;
-
-          if (objectURL != null) {
-            const bgColor = calculateBackgroundColor(workingCanvasRef.current, imgEl);
-            setBackgroundColor(bgColor);
-          }
-        }}
-      />
-      <button
-        className="close-button"
-        onClick={(e) => {
-          e.preventDefault();
-          resetImage();
-        }}
-      >
-        X
-      </button>
-    </div>
-  );
 
   return (
     <div className="selfie-container">
-
       <label htmlFor="selfie" className="section-label">
         Kasvokuva
       </label>
-      {PreviewElement}
+      {displayImage && (
+        <PreviewElement
+          objectURL={objectURL ?? ''}
+          removeImage={() => {
+            setObjectURL(null);
+          }}
+        />
+      )}
+
       <input
         type="file"
         id="selfie"

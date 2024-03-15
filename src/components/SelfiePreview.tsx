@@ -11,12 +11,12 @@ interface PreviewElementProps {
 export function PreviewElement(props: PreviewElementProps) {
   const { objectURL, removeImage } = props;
 
-  const [backgroundColor, setBackgroundColor] = useState('red');
+  const [backgroundColor, setBackgroundColor] = useState('transparent');
   const [transitioning, startTransition] = useTransition();
 
   const workingCanvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   return (
-    <div className="selfie-preview" style={{ backgroundColor: transitioning ? 'red' : backgroundColor }}>
+    <div className="selfie-preview" style={{ backgroundColor: transitioning ? 'transparent' : backgroundColor }}>
       <img
         alt="Uploaded selfie"
         src={objectURL}
